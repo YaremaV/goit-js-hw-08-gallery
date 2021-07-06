@@ -65,11 +65,17 @@ const galleryItems = [
 ];
 
 const onGallery = document.querySelector('.js-gallery');
-console.log(onGallery);
 const galleryCardsMarkup = createsGalleryCards(galleryItems);
+const gallerylightbox = document.querySelector('.lightbox');
+const lightboxImageEl = document.querySelector('.lightbox__image');
+const btnCloseModal = document.querySelector('button[data-action="close-lightbox"]')
+
+
+
 onGallery.insertAdjacentHTML('beforeend', galleryCardsMarkup);
 
 onGallery.addEventListener('click', onGalleryClick);
+btnCloseModal.addEventListener('click', closeModal);
 
 
 function createsGalleryCards(galleryItems) {
@@ -92,13 +98,27 @@ function createsGalleryCards(galleryItems) {
    })
      .join('')
 
-}
+};
 
 function onGalleryClick(evt) {
-  evt.preventDefault()
-  
+  evt.preventDefault();
+
   if (!evt.target.classList.contains('gallery__image')) {
     return;
   };
   console.log(evt.target.dataset.source);
+  openModal();
+
+};
+
+function openModal() {
+  gallerylightbox.classList.add('is-open');
+  lightboxImageEl.setAttribute('src', 'https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843_1280.jpg');
+ 
+};
+
+function closeModal() {
+  gallerylightbox.classList.remove('is-open');
+  lightboxImageEl.removeAttribute('src', 'https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843_1280.jpg');
 }
+
