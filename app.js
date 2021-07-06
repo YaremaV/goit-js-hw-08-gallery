@@ -95,8 +95,10 @@ function createsGalleryCards(galleryItems) {
 }
 
 function onGalleryClick(evt) {
+  evt.preventDefault()
+  
   if (!evt.target.classList.contains('gallery__image')) {
     return;
   };
-  console.log(evt.target);
+  console.log(evt.target.dataset.source);
 }
