@@ -64,12 +64,13 @@ const galleryItems = [
   },
 ];
 
+const originalSrc = galleryItems.map((item) => item.original)
+
 const onGallery = document.querySelector('.js-gallery');
 const galleryCardsMarkup = createsGalleryCards(galleryItems);
-const gallerylightbox = document.querySelector('.lightbox');
+const gallerylightbox = document.querySelector('.js-lightbox');
 const lightboxImageEl = document.querySelector('.lightbox__image');
 const btnCloseModal = document.querySelector('button[data-action="close-lightbox"]')
-
 
 
 onGallery.insertAdjacentHTML('beforeend', galleryCardsMarkup);
@@ -107,18 +108,21 @@ function onGalleryClick(evt) {
     return;
   };
   console.log(evt.target.dataset.source);
-  openModal();
+  openModal(evt);
 
 };
 
-function openModal() {
+function openModal(evt) {
+  
   gallerylightbox.classList.add('is-open');
-  lightboxImageEl.setAttribute('src', 'https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843_1280.jpg');
- 
+  lightboxImageEl.src = evt.target.dataset.source;
+  lightboxImageEl.alt = evt.target.alt;
 };
 
 function closeModal() {
   gallerylightbox.classList.remove('is-open');
-  lightboxImageEl.removeAttribute('src', 'https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843_1280.jpg');
+  lightboxImageEl.removeAttribute('src', '');
+  lightboxImageEl.removeAttribute('alt', '');
 }
+
 
