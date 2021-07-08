@@ -131,12 +131,29 @@ function closeModal() {
 }
 
 function onEscKeyPress(evt) {
+
   if (evt.code === 'Escape') {
     closeModal();
   }
-  
+  if (evt.code === 'ArrowRight' || evt.code === 'ArrowLeft') {
+    showNextImg(evt.code === 'ArrowRight');
+  }
 }
 
 
 
+const imgArr = galleryItems.map(img => img.original);
+
+function showNextImg(direction) {
+  let index;
+  let currentImg = imgArr.indexOf(lightboxImageEl.src);
+  index = direction ? currentImg + 1 : currentImg - 1;
+  if (index < 0) {
+    index = galleryItems.length + index;
+  }
+  if (index === galleryItems.length) {
+    index = 0;
+  }
+  lightboxImageEl.src = imgArr[index];
+}
 
